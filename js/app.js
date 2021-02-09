@@ -104,7 +104,7 @@ function itemTable(article, prix){
 
     let strBasket = JSON.stringify(obj) // We stringify the object to pass it to the array
     tab.push(strBasket); // We push in the array the stringified object
-    localStorage.setItem("panier",tab); // We pick the array
+    localStorage.setItem("cart",tab); // We pick the array
   
     // add the row to the end of the table body
     tblBody.appendChild(row);
@@ -118,12 +118,16 @@ function itemTable(article, prix){
 }
 
 
-localStorage.getItem("panier"); // We get the array to keep in the local storage
+localStorage.getItem("cart"); // We get the array to keep in the local storage
+
+
 
 function deleteItem(event){
     console.log('yoyoyo')
     event.target.parentNode.parentNode.remove() 
     //We are getting back 2 time to get to the class of the item to delete it
+    localStorage.removeItem("cart");
+    //We remove the article from the localstorage when the user remove the artcile in the cart
 }
 
 
