@@ -1,6 +1,9 @@
 let items = document.querySelector('#courses-list'); 
+let Empty = document.querySelector('.emptyCart');
 
 items.addEventListener('click', addToCart); //putting a listener on courses-list
+
+Empty.addEventListener('click',emptyBasket);
 
 function addToCart (event){
 
@@ -12,27 +15,27 @@ let number = event.target.getAttribute ('data-id')
             switch (number){ //adding a switch for each article 
                 case '1': 
                     itemTable('UI/UX', '9,99')
-                    console.log("ajout de l'article UIUX" )
+                    console.log("Adding UIUX" )
                     break;
                 
                 case '2':
                     itemTable('php', '9,99')
-                    console.log("ajout de l'article php" )
+                    console.log("Adding php" )
                     break;
                     
                 case '3':
                     itemTable('reactJS', '9,99')
-                    console.log("ajout de l'article reactjs" )  
+                    console.log("Adding reactjs" )  
                     break;
 
                 case '4':
                     itemTable('NodeJS', '9,99')
-                    console.log("ajout de l'article nodejs" )    
+                    console.log("Adding nodejs" )    
                     break;  
                 
                 case '5':
                     itemTable('mySQL', '9,99')
-                    console.log("ajout de l'article mysql" )    
+                    console.log("Adding mysql" )    
                     break;  
                 
                 default: 
@@ -123,13 +126,20 @@ localStorage.getItem("cart"); // We get the array to keep in the local storage
 
 
 function deleteItem(event){
-    console.log('yoyoyo')
+    console.log('Removing a Article')
     event.target.parentNode.parentNode.remove() 
     //We are getting back 2 time to get to the class of the item to delete it
     localStorage.removeItem("cart");
-    //We remove the article from the localstorage when the user remove the artcile in the cart
+    //We remove all articles from the localstorage when the user remove the artcile in the cart
 }
 
+function emptyBasket(event){
+    console.log('Removing all Article')
+    event.target.appendChild.remove();
+
+    localStorage.removeItem("cart");
+
+}
 
 
 
