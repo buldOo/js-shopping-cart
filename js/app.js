@@ -42,102 +42,73 @@ let number = event.target.getAttribute ('data-id')
     }else{ //display a message if something went wrong
         console.log("Error")
     }
-    //.push
-}
-function addElement (String, id) {
-    let newDiv = document.createElement("div");
-    document.getElementById(id).append(newDiv, String);
+    
 }
 
 let i = null;
 let j = null;
 
-function generate_table() {
-    // get the reference for the body
-    var body = document.getElementById("tr1");
-  
-    // creates a <table> element and a <tbody> element
-    var tbl = document.createElement("table");
-    var tblBody = document.createElement("tbody");
-  
-    // creating all cells
-    for (i = 0; i < 1; i++) {
-      // creates a table row
-      var row = document.createElement("tr");
-  
-      for (j = 0; j < 3; j++) {
-        // Create a <td> element and a text node, make the text
-        // node the contents of the <td>, 
-        var cell = document.createElement("td");
-        
-        if(i == 0 && j== 0){
-            var cellText = document.createTextNode("Article");
-        } else if (i == 0 && j== 1){
-            var cellText = document.createTextNode("Prix");
-        } else if (i == 0 && j== 2){
-            var cellText = document.createTextNode("qantité");    
-        }
-        
-        //and put the <td> at the end of the table row
-        cell.appendChild(cellText);
-        row.appendChild(cell);
-  
-      // add the row to the end of the table body
-      tblBody.appendChild(row);
-    }
-  
-    // put the <tbody> in the <table>
-    tbl.appendChild(tblBody);
-    // appends <table> into <body>
-    body.appendChild(tbl);
-    // sets the border attribute of tbl to 2;
-    tbl.setAttribute("border", "2");
-  }
-}
-
-
-//on appelle la fonction create table
-generate_table()
+var tblBody = document.getElementById("tableBody");
 
 function itemTable(article, prix){
-    // get the reference for the body
-    var body = document.getElementById("tr1");
+    
+    // creates a balise <tr>
+    var row = document.createElement("tr");
+    row.className ="row"
   
-    // creates a <table> element and a <tbody> element
-    var tbl = document.createElement("table");
-    var tblBody = document.createElement("tbody");
-  
-    // creating all cells
-    for (i = 0; i < 1; i++) {
-      // creates a table row
-      var row = document.createElement("tr");
-  
-      for (j = 0; j < 3; j++) {
-        // Create a <td> element and a text node, make the text
-        // node the contents of the <td>, and put the <td> at
-        // the end of the table row
-        var cell = document.createElement("td");
+    //creating all column
+    // Create a <td> element and a text node, make the text
+    // node the contents of the <td>, and put the <td> at
+    // the end of the table row
+    var cell = document.createElement("td"); //Leaving an empty space
+    var cellText = document.createTextNode(' ');
+    cell.appendChild(cellText);
+    row.appendChild(cell);
+
+    var cell1 = document.createElement("td"); //Putting a string under article to stock the name of the product
+    var cellText1 = document.createTextNode(article);
+    cell1.appendChild(cellText1);
+    row.appendChild(cell1);
+
+    var cell2 = document.createElement("td"); // Getting thgetAttribute
+    var cellText2 = document.createTextNode (prix + '€');
+    cell2.appendChild(cellText2)
+    row.appendChild(cell2);
+
+    var cell3 = document.createElement("td"); // Adding quantity under quantity category
+    var cellText3 = document.createTextNode('1');
+    cell3.appendChild(cellText3);
+    row.appendChild(cell3);
+
+    var cell4 = document.createElement("td"); // Adding a cross that will serve as a supress button
         
-        if(i == 0 && j== 0){
-            var cellText = document.createTextNode(article);
-        } else if (i == 0 && j== 1){
-            var cellText = document.createTextNode(prix+'€');
-        } else if (i == 0 && j== 2){
-            var cellText = document.createTextNode('1');    
-        }
-        
-        cell.appendChild(cellText);
-        row.appendChild(cell);
+    var cellText4 = document.createTextNode('❌');
+
+    var deletebtn = document.createElement("span")
+    //add a classname in the <span>
+    deletebtn.className = "delete"
+
+    deletebtn.appendChild(cellText4)
+    cell4.appendChild(deletebtn)
+
+    row.appendChild(cell4);
+
+    console.log(tblBody)
   
-      // add the row to the end of the table body
-      tblBody.appendChild(row);
+    // add the row to the end of the table body
+    tblBody.appendChild(row);
+
+    //recover and listen to the click of the deletion
+    let cross = document.getElementsByClassName('delete'); 
+    for (i = 0; i < cross.length; i++) {
+        cross[i].addEventListener("click", deleteItem);
     }
-  
-    // put the <tbody> in the <table>
-    tbl.appendChild(tblBody);
-    // appends <table> into <body>
-    body.appendChild(tbl);
-    // sets the border attribute of tbl to 2;
-    tbl.setAttribute("border", "2");
-  }
+
 }
+
+function deleteItem(event){
+    console.log('yoyoyo')
+    event.target.parentNode.parentNode.remove() 
+    //We are getting back 2 time to get to the class of the item to delete it
+}
+

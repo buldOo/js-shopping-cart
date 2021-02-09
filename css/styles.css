@@ -46,6 +46,7 @@ header .submenu #img-cart {
   font-weight: 600;
   border: none;
 }
+
 #cart table tbody td img {width: auto;height: 40px;}
 #cart table tbody .supprimer-item {
   display: block;
