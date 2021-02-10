@@ -1,5 +1,5 @@
 let items = document.querySelector('#courses-list'); 
-let Empty = document.querySelector('.emptyCart');
+let Empty = document.querySelector('#empty-cart');
 
 items.addEventListener('click', addToCart); //putting a listener on courses-list
 
@@ -107,7 +107,7 @@ function itemTable(article, prix){
 
     let strBasket = JSON.stringify(obj) // We stringify the object to pass it to the array
     tab.push(strBasket); // We push in the array the stringified object
-    localStorage.setItem("cart",tab); // We pick the array
+    localStorage.setItem("cart",JSON.stringify(tab)); // We pick the array
   
     // add the row to the end of the table body
     tblBody.appendChild(row);
@@ -120,26 +120,23 @@ function itemTable(article, prix){
  
 }
 
-
-localStorage.getItem("cart"); // We get the array to keep in the local storage
-
-
+let storage = JSON.parse(localStorage.getItem("cart")); // We get the array to keep in the local storage
 
 function deleteItem(event){
     console.log('Removing a Article')
     event.target.parentNode.parentNode.remove() 
     //We are getting back 2 time to get to the class of the item to delete it
-    localStorage.removeItem("cart");
-    //We remove all articles from the localstorage when the user remove the artcile in the cart
+    localStorage.removeItem("row")
+    //We remove the article from the localstorage when the user remove the artcile in the cart
 }
 
 function emptyBasket(event){
     console.log('Removing all Article')
-    event.target.appendChild.remove();
-
     localStorage.removeItem("cart");
-
+    tblBody.innerHTML=""
+    //Remove all articles from the localstorage when the user remove the artcile in the cart
 }
 
-
+//boucler à l'intérieur et comparer les id
+//tout vider et reremplir
 
