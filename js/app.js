@@ -1,6 +1,9 @@
 let items = document.querySelector('#courses-list'); 
+let Empty = document.querySelector('.emptyCart');
 
 items.addEventListener('click', addToCart); //putting a listener on courses-list
+
+Empty.addEventListener('click',emptyBasket);
 
 function addToCart (event){
 
@@ -12,27 +15,27 @@ let number = event.target.getAttribute ('data-id')
             switch (number){ //adding a switch for each article 
                 case '1': 
                     itemTable('UI/UX', '9,99')
-                    console.log("ajout de l'article UIUX" )
+                    console.log("Adding UIUX" )
                     break;
                 
                 case '2':
                     itemTable('php', '9,99')
-                    console.log("ajout de l'article php" )
+                    console.log("Adding php" )
                     break;
                     
                 case '3':
                     itemTable('reactJS', '9,99')
-                    console.log("ajout de l'article reactjs" )  
+                    console.log("Adding reactjs" )  
                     break;
 
                 case '4':
                     itemTable('NodeJS', '9,99')
-                    console.log("ajout de l'article nodejs" )    
+                    console.log("Adding nodejs" )    
                     break;  
                 
                 case '5':
                     itemTable('mySQL', '9,99')
-                    console.log("ajout de l'article mysql" )    
+                    console.log("Adding mysql" )    
                     break;  
                 
                 default: 
@@ -42,102 +45,101 @@ let number = event.target.getAttribute ('data-id')
     }else{ //display a message if something went wrong
         console.log("Error")
     }
-    //.push
-}
-function addElement (String, id) {
-    let newDiv = document.createElement("div");
-    document.getElementById(id).append(newDiv, String);
+    
 }
 
 let i = null;
 let j = null;
+var tab = []; // declare an array to insert an object
 
-function generate_table() {
-    // get the reference for the body
-    var body = document.getElementById("tr1");
-  
-    // creates a <table> element and a <tbody> element
-    var tbl = document.createElement("table");
-    var tblBody = document.createElement("tbody");
-  
-    // creating all cells
-    for (i = 0; i < 1; i++) {
-      // creates a table row
-      var row = document.createElement("tr");
-  
-      for (j = 0; j < 3; j++) {
-        // Create a <td> element and a text node, make the text
-        // node the contents of the <td>, 
-        var cell = document.createElement("td");
-        
-        if(i == 0 && j== 0){
-            var cellText = document.createTextNode("Article");
-        } else if (i == 0 && j== 1){
-            var cellText = document.createTextNode("Prix");
-        } else if (i == 0 && j== 2){
-            var cellText = document.createTextNode("qantité");    
-        }
-        
-        //and put the <td> at the end of the table row
-        cell.appendChild(cellText);
-        row.appendChild(cell);
-  
-      // add the row to the end of the table body
-      tblBody.appendChild(row);
-    }
-  
-    // put the <tbody> in the <table>
-    tbl.appendChild(tblBody);
-    // appends <table> into <body>
-    body.appendChild(tbl);
-    // sets the border attribute of tbl to 2;
-    tbl.setAttribute("border", "2");
-  }
-}
+var sqte = 0
 
-
-//on appelle la fonction create table
-generate_table()
+var tblBody = document.getElementById("tableBody");
 
 function itemTable(article, prix){
-    // get the reference for the body
-    var body = document.getElementById("tr1");
+    
+    // creates a balise <tr>
+    var row = document.createElement("tr");
+    row.className ="row"
+    var obj = {}; // We declare an object
   
-    // creates a <table> element and a <tbody> element
-    var tbl = document.createElement("table");
-    var tblBody = document.createElement("tbody");
+    //creating all column
+    // Create a <td> element and a text node, make the text
+    // node the contents of the <td>, and put the <td> at
+    // the end of the table row
+    var cell = document.createElement("td"); //Leaving an empty space
+    var cellText = document.createTextNode(' ');
+    cell.appendChild(cellText);
+    row.appendChild(cell);
+
+    var cell1 = document.createElement("td"); //Putting a string under article to stock the name of the product
+    var cellText1 = document.createTextNode(article);
+    cell1.appendChild(cellText1);
+    row.appendChild(cell1);
+    obj.article = cellText1.nodeValue; // We affect the value to this key
+
+    var cell2 = document.createElement("td"); // Getting the getAttribute
+    var cellText2 = document.createTextNode (prix + '€');
+    cell2.appendChild(cellText2)
+    row.appendChild(cell2);
+    obj.price = cellText2.nodeValue; // Same thing for the price
+
+    var cell3 = document.createElement("td"); // Adding quantity under quantity category
+    var cellText3 = document.createTextNode("1");
+    cell3.appendChild(cellText3);
+    row.appendChild(cell3); 
+    obj.qty = cellText3.nodeValue; // '' for the quantity
+    
+
+    var cell4 = document.createElement("td"); // Adding a cross that will serve as a supress button
+    var cellText4 = document.createTextNode('❌');
+
+    var deletebtn = document.createElement("span")
+    //add a classname in the <span>
+    deletebtn.className = "delete"
+
+    deletebtn.appendChild(cellText4)
+    cell4.appendChild(deletebtn)
+
+    row.appendChild(cell4);
+
+    console.log(tblBody)
+
+    let strBasket = JSON.stringify(obj) // We stringify the object to pass it to the array
+    tab.push(strBasket); // We push in the array the stringified object
+    localStorage.setItem("cart",tab); // We pick the array
   
-    // creating all cells
-    for (i = 0; i < 1; i++) {
-      // creates a table row
-      var row = document.createElement("tr");
-  
-      for (j = 0; j < 3; j++) {
-        // Create a <td> element and a text node, make the text
-        // node the contents of the <td>, and put the <td> at
-        // the end of the table row
-        var cell = document.createElement("td");
-        
-        if(i == 0 && j== 0){
-            var cellText = document.createTextNode(article);
-        } else if (i == 0 && j== 1){
-            var cellText = document.createTextNode(prix+'€');
-        } else if (i == 0 && j== 2){
-            var cellText = document.createTextNode('1');    
-        }
-        
-        cell.appendChild(cellText);
-        row.appendChild(cell);
-  
-      // add the row to the end of the table body
-      tblBody.appendChild(row);
+    // add the row to the end of the table body
+    tblBody.appendChild(row);
+
+    //recover and listen to the click of the deletion
+    let cross = document.getElementsByClassName('delete'); 
+    for (i = 0; i < cross.length; i++) {
+        cross[i].addEventListener("click", deleteItem);
     }
-  
-    // put the <tbody> in the <table>
-    tbl.appendChild(tblBody);
-    // appends <table> into <body>
-    body.appendChild(tbl);
-    // sets the border attribute of tbl to 2;
-    tbl.setAttribute("border", "2");
-  }
+ 
 }
+
+
+localStorage.getItem("cart"); // We get the array to keep in the local storage
+
+
+
+function deleteItem(event){
+    console.log('Removing a Article')
+    event.target.parentNode.parentNode.remove() 
+    //We are getting back 2 time to get to the class of the item to delete it
+    localStorage.removeItem("cart");
+    //We remove all articles from the localstorage when the user remove the artcile in the cart
+}
+
+function emptyBasket(event){
+    console.log('Removing all Article')
+    event.target.appendChild.remove();
+
+    localStorage.removeItem("cart");
+
+}
+
+
+
