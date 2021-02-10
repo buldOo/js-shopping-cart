@@ -17,7 +17,7 @@ let number = event.target.getAttribute ('data-id')
                     itemTable('UI/UX', '9,99')
                     console.log("Adding UIUX" )
                     break;
-                
+
                 case '2':
                     itemTable('php', '9,99')
                     console.log("Adding php" )
