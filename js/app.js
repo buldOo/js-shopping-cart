@@ -17,7 +17,7 @@ let number = event.target.getAttribute ('data-id')
                     itemTable('UI/UX', '9,99')
                     console.log("Adding UIUX" )
                     break;
-                
+
                 case '2':
                     itemTable('php', '9,99')
                     console.log("Adding php" )
@@ -144,7 +144,10 @@ function emptyBasket(){
 //tout vider et reremplir
 
 //1 : crée une fonction
-/*
+/*function getLocalStorage(){
+    let array = [];
+    var aValue = localStorage.getItem("cart");
+
 function getLocalStorage(){
     let array = [];
     //2 : récup toute les ligne du tableaux panier (id)
@@ -165,13 +168,10 @@ function getLocalStorage(){
         array.push(index);
         console.log(aValue);
     }
-}
-*/
-
-
-
-
-
+}*/
+//4 : pousse dans un tableau l'objet à chaque itération sur les tr
+//5 : enregistrer le tableau dans le local storage
+//6 : appel la fonction crée a l'étape 1 (dans delete item)
 //3 : reconstituer un objet par ligne du tableau (id)
 //4 : pousse dans un tableau l'objet à chaque itération sur les tr
 //5 : enregistrer le tableau dans le local storage
