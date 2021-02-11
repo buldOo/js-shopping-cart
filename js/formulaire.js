@@ -1,8 +1,7 @@
 var aValue = localStorage.getItem("cart");
 
-window.onload = logCart(aValue);
+window.onload = getLocalStorage(aValue);
 
-function logCart(cart) {
-    console.log(cart);
-    
+function getLocalStorage(value){
+  
 }

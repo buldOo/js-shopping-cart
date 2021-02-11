@@ -140,3 +140,18 @@ function emptyBasket(event){
 //boucler à l'intérieur et comparer les id
 //tout vider et reremplir
 
+//1 : crée une fonction
+/*function getLocalStorage(){
+    let array = [];
+    var aValue = localStorage.getItem("cart");
+    console.log(aValue);
+
+    for (i = 0; i < aValue.length; i++){
+        let index = aValue[i];
+        array.push(index);
+        console.log(aValue);
+    }
+}*/
+//4 : pousse dans un tableau l'objet à chaque itération sur les tr
+//5 : enregistrer le tableau dans le local storage
+//6 : appel la fonction crée a l'étape 1 (dans delete item)
