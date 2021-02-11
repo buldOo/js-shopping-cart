@@ -15,35 +15,40 @@ let number = event.target.getAttribute ('data-id')
             switch (number){ //adding a switch for each article 
                 case '1': 
                     itemTable('UI/UX', '9,99')
+                    getLocalStorage()
                     console.log("Adding UIUX" )
                     break;
 
                 case '2':
                     itemTable('php', '9,99')
+                    getLocalStorage()
                     console.log("Adding php" )
                     break;
                     
                 case '3':
                     itemTable('reactJS', '9,99')
+                    getLocalStorage()
                     console.log("Adding reactjs" )  
                     break;
 
                 case '4':
                     itemTable('NodeJS', '9,99')
+                    getLocalStorage()
                     console.log("Adding nodejs" )    
                     break;  
                 
                 case '5':
                     itemTable('mySQL', '9,99')
+                    getLocalStorage()
                     console.log("Adding mysql" )    
                     break;  
                 
                 default: 
-                    console.log("Error")    
+                    console.log("missclick")    
             }
 
     }else{ //display a message if something went wrong
-        console.log("Error")
+        console.log("missclick")
     }
     
 }
@@ -74,12 +79,14 @@ function itemTable(article, prix){
 
     var cell1 = document.createElement("td"); //Putting a string under article to stock the name of the product
     var cellText1 = document.createTextNode(article);
+    cell1.className = "td1"
     cell1.appendChild(cellText1);
     row.appendChild(cell1);
     obj.article = cellText1.nodeValue; // We affect the value to this key
 
     var cell2 = document.createElement("td"); // Getting the getAttribute
     var cellText2 = document.createTextNode (prix + '€');
+    cell2.className = "td2"
     cell2.appendChild(cellText2)
     row.appendChild(cell2);
     obj.price = cellText2.nodeValue; // Same thing for the price
@@ -93,10 +100,11 @@ function itemTable(article, prix){
 
     var cell4 = document.createElement("td"); // Adding a cross that will serve as a supress button
     var cellText4 = document.createTextNode('❌');
-
+    //cell4.setAttribute(id, "1")
     var deletebtn = document.createElement("span")
     //add a classname in the <span>
     deletebtn.className = "delete"
+    deletebtn.setAttribute("id", "cross")
 
     deletebtn.appendChild(cellText4)
     cell4.appendChild(deletebtn)
@@ -124,7 +132,8 @@ let storage = JSON.parse(localStorage.getItem("cart")); // We get the array to k
 
 function deleteItem(event){
     console.log('Removing a Article')
-    event.target.parentNode.parentNode.remove() 
+    
+    event.target.parentNode.parentNode.remove()
     //We are getting back 2 time to get to the class of the item to delete it
     localStorage.removeItem("row")
     //We remove the article from the localstorage when the user remove the artcile in the cart
@@ -141,9 +150,26 @@ function emptyBasket(event){
 //tout vider et reremplir
 
 //1 : crée une fonction
+<<<<<<< HEAD
 /*function getLocalStorage(){
     let array = [];
     var aValue = localStorage.getItem("cart");
+=======
+
+function getLocalStorage(){
+    let array = [];
+    //2 : récup toute les ligne du tableaux panier (id)
+    let tr = document.getElementById("tableBody").getElementsByTagName("tr")
+    console.log(tr)
+
+    let obj = {};
+    obj.name = "article"
+    obj.price = "price"
+    obj.qty = "qty"
+    
+    console.log(obj)
+    let aValue = localStorage.getItem("cart");
+>>>>>>> b0373cac34730f5f67e334e0053bce88aaa2ca9b
     console.log(aValue);
 
     for (i = 0; i < aValue.length; i++){
@@ -151,7 +177,20 @@ function emptyBasket(event){
         array.push(index);
         console.log(aValue);
     }
+<<<<<<< HEAD
 }*/
 //4 : pousse dans un tableau l'objet à chaque itération sur les tr
 //5 : enregistrer le tableau dans le local storage
 //6 : appel la fonction crée a l'étape 1 (dans delete item)
+=======
+}
+
+
+
+
+
+//3 : reconstituer un objet par ligne du tableau (id)
+//4 : pousse dans un tableau l'objet à chaque itération sur les tr
+//5 : enregistrer le tableau dans le local storage
+//6 : appel la fonction crée a l'étape 1 (dans delete item)
+>>>>>>> b0373cac34730f5f67e334e0053bce88aaa2ca9b
